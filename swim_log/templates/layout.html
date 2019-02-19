@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <style>
@@ -38,26 +39,52 @@
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">Swim Log</a>
+      <a class="navbar-brand" href="#"><i class="fas fa-fish"></i> Swim Log</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Left navigation -->
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
+          {% if not current_user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+            <a id="home" class="nav-link" href="{{ url_for('home') }}"><i class="fas fa-home"></i> Home</a>
           </li>
+          {% endif %}
+          {% if current_user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('about') }}">About</a>
+            <a id="dashboard" class="nav-link" href="{{ url_for('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
           </li>
+          {% endif %}
+          {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <a id="history" class="nav-link" href="{{ url_for('history') }}"><i class="fas fa-history"></i> History</a>
+          </li>
+          {% endif %}
+          {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <a id="add_swim" class="nav-link" href="{{ url_for('add_swim') }}"><i class="fas fa-swimmer"></i> Add Swim</a>
+          </li>
+          {% endif %}
         </ul>
-      </div>
-      <!-- Right navigation -->
-      <div class="navbar-nav">
-        <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
-        <span class="navbar-text"> <u>or</u> </span>
-        <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
+        <ul class="navbar-nav ml-auto">
+          {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <a id="account" class="nav-link" href="{{ url_for('account') }}"><i class="fas fa-user-circle"></i> Account</a>
+          </li>
+          <li class="nav-item">
+            <a id="logout" class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a id="login" class="nav-link" href="{{ url_for('login') }}">Login</a>
+          </li>
+          <span class="navbar-text"> <u>or</u> </span>
+          <li class="nav-item">
+            <a id="register" class="nav-link" href="{{ url_for('register') }}">Register</a>
+          </li>
+          {% endif %}
+        </ul>
       </div>
     </nav>
 
@@ -87,5 +114,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function () {
+    $("#{{request.endpoint}}").parent().addClass("active"); })
+    </script>
 </body>
 </html>
