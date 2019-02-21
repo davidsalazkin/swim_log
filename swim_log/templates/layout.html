@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
     <style>
         .footer {
           position: absolute;
@@ -61,27 +62,24 @@
             <a id="history" class="nav-link" href="{{ url_for('history') }}"><i class="fas fa-history"></i> History</a>
           </li>
           {% endif %}
-          {% if current_user.is_authenticated %}
-          <li class="nav-item">
-            <a id="add_swim" class="nav-link" href="{{ url_for('add_swim') }}"><i class="fas fa-swimmer"></i> Add Swim</a>
-          </li>
-          {% endif %}
         </ul>
         <ul class="navbar-nav ml-auto">
           {% if current_user.is_authenticated %}
           <li class="nav-item">
+            <a id="new_swim" class="nav-link" href="{{ url_for('new_swim') }}"><i class="fas fa-plus-circle"></i> New Swim</a>
+          </li>
+          <li class="nav-item">
             <a id="account" class="nav-link" href="{{ url_for('account') }}"><i class="fas fa-user-circle"></i> Account</a>
           </li>
           <li class="nav-item">
-            <a id="logout" class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+            <a id="logout" class="nav-link" href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a id="login" class="nav-link" href="{{ url_for('login') }}">Login</a>
+            <a id="login" class="nav-link" href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
           </li>
-          <span class="navbar-text"> <u>or</u> </span>
           <li class="nav-item">
-            <a id="register" class="nav-link" href="{{ url_for('register') }}">Register</a>
+            <a id="register" class="nav-link" href="{{ url_for('register') }}"><i class="fas fa-user-check"></i> Register</a>
           </li>
           {% endif %}
         </ul>
