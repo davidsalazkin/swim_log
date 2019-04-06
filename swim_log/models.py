@@ -20,24 +20,13 @@ class User(db.Model, UserMixin):
 
 
 class Session(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    session_date = db.Column(db.Date, unique=True, nullable=False)
-    session_length = db.Column(db.Integer, nullable=False)
-    session_distance = db.Column(db.Integer, nullable=False)
-    swims = db.relationship('Swim', backref='swim_session', lazy=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    id = db.Column(db.Integer(), primary_key=True)
+    session_date = db.Column(db.Date())
+    swim_type = db.Column(db.String())
+    swim_distance = db.Column(db.Integer())
+    swim_stroke = db.Column(db.String())
+    swim_time = db.Column(db.Integer())
+    user_id = db.Column(db.Integer(), db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
-        return f"Session('{self.session_date}', '{self.session_length}', '{self.session_distance}')"
-
-
-class Swim(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    swim_distance = db.Column(db.Integer, nullable=False)
-    swim_stroke = db.Column(db.String, nullable=False)
-    swim_time = db.Column(db.Integer)
-    swim_type = db.Column(db.String, default='Working')
-    session_id = db.Column(db.Integer, db.ForeignKey('session.id'), nullable=False)
-
-    def __repr__(self):
-        return f"Swim('{self.swim_distance}', '{self.swim_stroke}', '{self.swim_time}', '{self.swim_type}')"
+        return f"Session('{self.session_date}', '{self.swim_type}', {self.swim_distance}, '{self.swim_stroke}', {self.swim_time})"

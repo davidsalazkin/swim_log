@@ -1,4 +1,35 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>History</h1>
+    <h1>History</h1><hr>
+    {% for session in sessions %}
+        {% if session.user_id == current_user.id %}
+        <div class="card w3-animate-opacity">
+            <div class="card-body">
+                <center><u><h3><a href="{{ url_for('session', session_id=session.id) }}">{{ session.session_date }}</a></h3></u></center>
+                <br>
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Swim Type</th>
+                            <th>Stroke</th>
+                            <th>Distance</th>
+                            <th>Time (in seconds)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>{{ session.swim_type }}</td>
+                            <td>{{ session.swim_stroke }}</td>
+                            <td>{{ session.swim_distance }}</td>
+                            <td>{{ session.swim_time }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        {% endif %}
+    {% endfor %}
 {% endblock content %}

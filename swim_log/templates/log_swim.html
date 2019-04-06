@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="card w3-animate-opacity">
+        <div class="card-body">
+            <center><h1 class="card-title">{{ legend }}</h1></center>
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <div class="form-group">
+                        {{ form.session_date.label(class="form-control-label") }}
+
+                        <!-- Error control -->
+                        {% if form.session_date.errors %}
+                            {{ form.session_date(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.session_date.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.session_date(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <!-- Swim -->
+                    </br><h3>Swim</h3><hr>
+                    <div class="row">
+                        <div class="col"">
+                            <div class="form-group">
+                                {{ form.swim_type.label(class="form-control-label") }}
+
+                                <!-- Error control -->
+                                {% if form.swim_type.errors %}
+                                    {{ form.swim_type(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.swim_type.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.swim_type(class="form-control form-control-lg") }}
+                                {% endif %}
+                                <small id="emailHelp" class="form-text text-muted"><a href="#">Learn about the options in this field.</a></small>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form.swim_stroke.label(class="form-control-label") }}
+
+                                <!-- Error control -->
+                                {% if form.swim_stroke.errors %}
+                                    {{ form.swim_stroke(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.swim_stroke.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.swim_stroke(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form.swim_distance.label(class="form-control-label") }}
+
+                                <!-- Error control -->
+                                {% if form.swim_distance.errors %}
+                                    {{ form.swim_distance(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.swim_distance.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.swim_distance(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form.swim_time.label(class="form-control-label") }}
+
+                                <!-- Error control -->
+                                {% if form.swim_time.errors %}
+                                    {{ form.swim_time(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.swim_time.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.swim_time(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    <center>{{ form.submit(class="btn btn-outline-info") }}</center>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

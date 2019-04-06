@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>View Swim</h1><hr>
+        {% if session.user_id == current_user.id %}
+        <div class="card w3-animate-opacity">
+            <div class="card-body">
+                <center>
+                    <u><h3>{{ session.session_date }}</h3></u>
+                </center>
+                <br>
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Swim Type</th>
+                            <th>Stroke</th>
+                            <th>Distance</th>
+                            <th>Time (in seconds)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>{{ session.swim_type }}</td>
+                            <td>{{ session.swim_stroke }}</td>
+                            <td>{{ session.swim_distance }}</td>
+                            <td>{{ session.swim_time }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <center>
+                    <a class="btn btn-secondary btn-sm m-1" href="{{ url_for('update_session', session_id=session.id) }}">Update</a>
+                    <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">
+                        Delete
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModallabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModallabel">Delete Session?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <form action="{{ url_for('delete_swim', session_id=session.id) }}" method="POST">
+                                <input class="btn btn-danger" type="submit" value="Delete">
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </center>
+            </div>
+        </div>
+        <br>
+        {% endif %}
+{% endblock content %}

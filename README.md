@@ -56,6 +56,7 @@ When hosted locally, the project can be viewed in a browser at: http://127.0.0.1
 * [Flask-Bcrypt](https://flask-bcrypt.readthedocs.io/en/latest/) - Password hashing
 * [Flask-SQLAlchemy](http://flask-sqlalchemy.pocoo.org/2.3/) - Database toolkit
 * [Virtualenv](http://flask.pocoo.org/docs/1.0/installation/) - Dependency management
+* [Pillow](https://pillow.readthedocs.io/en/stable/) - Image size reduction
 
 ## Authors
 
