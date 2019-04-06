@@ -23,7 +23,8 @@ def dashboard():
 @app.route("/history")
 @login_required
 def history():
-    sessions = Session.query.all()
+    page = request.args.get('page', 1, type=int)
+    sessions = Session.query.order_by(Session.session_date.desc()).paginate(page=page, per_page=5)
     return render_template('history.html', title='History', sessions=sessions)
 
 
@@ -37,7 +38,7 @@ def log_swim():
         db.session.commit()
         flash('Your swim has been succesfully logged.', 'success')
         return redirect(url_for('history'))
-    return render_template('log_swim.html', title='Log Swim', form=form, legend='Log Swim')
+    return render_template('log_swim.html', title='Add Swim', form=form, legend='Add Swim')
 
 
 @app.route("/swim/<int:session_id>")

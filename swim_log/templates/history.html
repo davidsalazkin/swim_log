@@ -1,11 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1>History</h1><hr>
-    {% for session in sessions %}
+    {% for session in sessions.items %}
         {% if session.user_id == current_user.id %}
         <div class="card w3-animate-opacity">
             <div class="card-body">
-                <center><u><h3><a href="{{ url_for('session', session_id=session.id) }}">{{ session.session_date }}</a></h3></u></center>
+                <center><h3><a href="{{ url_for('session', session_id=session.id) }}">{{ session.session_date }}</a></h3></center>
+                <hr>
                 <br>
                 <table class="table">
                     <thead class="thead-light">
@@ -13,7 +14,7 @@
                             <th>#</th>
                             <th>Swim Type</th>
                             <th>Stroke</th>
-                            <th>Distance</th>
+                            <th>Distance (in yards)</th>
                             <th>Time (in seconds)</th>
                         </tr>
                     </thead>
@@ -32,4 +33,17 @@
         <br>
         {% endif %}
     {% endfor %}
+    <center>
+    {% for page_num in sessions.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+            {% if sessions.page == page_num %}
+                    <a class="btn btn-info mb-4" href="{{ url_for('history', page=page_num) }}">{{ page_num }}</a>
+            {% else %}
+                    <a class="btn btn-outline-info mb-4" href="{{ url_for('history', page=page_num) }}">{{ page_num }}</a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+    </center>
 {% endblock content %}
