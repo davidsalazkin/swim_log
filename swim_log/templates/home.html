@@ -1,4 +1,28 @@
 {% extends "layout.html" %}
-{% block content %}
-    <h1>Home</h1>
-{% endblock content %}
+{% block content_home %}
+    <div class="jumbotron" style="margin-top:-2em; background-color:#dee3e8">
+        <div class="container">
+            <h1 class="display-3">Start Logging!</h1>
+            <p><strong>Swimming is tough.</strong> Keeping track of your swimming progress is even tougher. Over 50% of solo swimmers don't track their swimming history and suffer painstakingly slow progress and decreased motivation as a result. Register today and take the grunt work out of the equation by logging your swims with Swim Log!</p>
+            <p><a class="btn btn-primary btn-lg" href="{{ url_for('users.register') }}" role="button">Register &raquo;</a></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Tracking</h2>
+                <p>View every swim that you've ever logged simply by navigating to your history. See the distances, strokes, dates, times and other information about any and every swim you've ever tracked. This is our bread and butter!</p>
+              </div>
+            <div class="col-md-4">
+                <h2>Analytics</h2>
+                <p>Are you curious what strokes you swim the most? How about the amount of time you've spent in the pool? Maybe you want to know how many sessions you've ever logged. You can view these analytics and more on your Dashboard!</p>
+            </div>
+            <div class="col-md-4">
+                <h2>Simple UI</h2>
+                <p>We get it - you just want to see what you need to make progress. By avoiding unnecessary features, the Swim Log team has managed to keep a clean, simple UI that only shows you what you need to get to the other side of the pool faster.</p>
+            </div>
+        </div>
+    </div>
+{% endblock content_home %}
