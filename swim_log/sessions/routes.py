@@ -18,7 +18,7 @@ def log_swim():
         db.session.add(logged_swim)
         db.session.commit()
         flash('Your swim has been succesfully logged.', 'success')
-        return redirect(url_for('main.history'))
+        return redirect(url_for('main.history', username=current_user.username))
     return render_template('log_swim.html', title='Add Swim', form=form, legend='Add Swim')
 
 
@@ -63,4 +63,4 @@ def delete_swim(session_id):
     db.session.delete(session)
     db.session.commit()
     flash('Your swim session has been deleted.', 'success')
-    return redirect(url_for('main.history'))
+    return redirect(url_for('main.history', username=current_user.username))

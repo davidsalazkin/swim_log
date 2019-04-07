@@ -15,7 +15,17 @@ def home():
 @main.route("/dashboard")
 @login_required
 def dashboard():
-    return render_template('dashboard.html', title='Dashboard')
+    user = User.query.filter_by(username=current_user.username).first_or_404()
+    totalSwims = Session.query.filter_by(swimmer=user).count()
+    sessions = Session.query.filter_by(swimmer=user)
+    totalTime = 0
+    for session in sessions:
+        totalTime += session.swim_time
+    freestyleCount = Session.query.filter_by(swimmer=user, swim_stroke='Freestyle').count()
+    backstrokeCount = Session.query.filter_by(swimmer=user, swim_stroke='Backstroke').count()
+    breaststrokeCount = Session.query.filter_by(swimmer=user, swim_stroke='Breaststroke').count()
+    butterflyCount = Session.query.filter_by(swimmer=user, swim_stroke='Butterfly').count()
+    return render_template('dashboard.html', title='Dashboard', totalSwims=totalSwims, totalTime=totalTime, freestyleCount=freestyleCount, backstrokeCount=backstrokeCount, breaststrokeCount=breaststrokeCount, butterflyCount=butterflyCount, user=user)
 
 
 @main.route("/history/<string:username>")
