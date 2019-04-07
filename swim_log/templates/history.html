@@ -5,7 +5,7 @@
         {% if session.user_id == current_user.id %}
         <div class="card w3-animate-opacity">
             <div class="card-body">
-                <center><h3><a href="{{ url_for('session', session_id=session.id) }}">{{ session.session_date }}</a></h3></center>
+                <center><h3><a href="{{ url_for('sessions.session', session_id=session.id) }}">{{ session.session_date }}</a></h3></center>
                 <hr>
                 <br>
                 <table class="table">
@@ -37,9 +37,9 @@
     {% for page_num in sessions.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
         {% if page_num %}
             {% if sessions.page == page_num %}
-                    <a class="btn btn-info mb-4" href="{{ url_for('history', page=page_num) }}">{{ page_num }}</a>
+                    <a class="btn btn-info mb-4" href="{{ url_for('main.history', page=page_num) }}">{{ page_num }}</a>
             {% else %}
-                    <a class="btn btn-outline-info mb-4" href="{{ url_for('history', page=page_num) }}">{{ page_num }}</a>
+                    <a class="btn btn-outline-info mb-4" href="{{ url_for('main.history', page=page_num) }}">{{ page_num }}</a>
             {% endif %}
         {% else %}
             ...
