@@ -27,9 +27,11 @@ def create_app(config_class=Config):
     from swim_log.users.routes import users
     from swim_log.sessions.routes import sessions
     from swim_log.main.routes import main
+    from swim_log.errors.handlers import errors
 
     app.register_blueprint(users)
     app.register_blueprint(sessions)
     app.register_blueprint(main)
+    app.register_blueprint(errors)
 
     return app
