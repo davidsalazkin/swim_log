@@ -4,16 +4,12 @@
     {% if not sessions.items %}
         <p>Looks like you haven't logged any swims yet - <a href="{{ url_for('sessions.log_swim') }}">get to it!</a></p>
     {% endif %}
-    {% for session in sessions.items %}
         <div class="card w3-animate-opacity">
             <div class="card-body">
-                <center><h3><a href="{{ url_for('sessions.session', session_id=session.id) }}">{{ session.session_date }}</a></h3></center>
-                <hr>
-                <br>
                 <table class="table">
                     <thead class="thead-light">
                         <tr>
-                            <th>#</th>
+                            <th>Date</th>
                             <th>Swim Type</th>
                             <th>Stroke</th>
                             <th>Distance (in yards)</th>
@@ -21,19 +17,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>{{ session.swim_type }}</td>
-                            <td>{{ session.swim_stroke }}</td>
-                            <td>{{ session.swim_distance }}</td>
-                            <td>{{ session.swim_time }}</td>
-                        </tr>
+                        {% for session in sessions.items %}
+                            <tr>
+                                <th scope="row"><a href="{{ url_for('sessions.session', session_id=session.id) }}">{{ session.session_date }}</a></th>
+                                <td>{{ session.swim_type }}</td>
+                                <td>{{ session.swim_stroke }}</td>
+                                <td>{{ session.swim_distance }}</td>
+                                <td>{{ session.swim_time }}</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
         <br>
-    {% endfor %}
     <center>
     {% for page_num in sessions.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
         {% if page_num %}
